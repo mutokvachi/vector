@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    container_name: db
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=vectorai
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    networks:
+      - app-network
+
+  starlette:
+    container_name: starlette
+    build: ./api
+    command: ['uvicorn', 'app:app', '--host', '0.0.0.0', '--reload']
+    volumes:
+      - ./api:/app/api
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    command: ["npm", "start"]
+    volumes:
+      - ./frontend:/app/frontend
+      - node-modules:/app/frontend/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+volumes:
+  node-modules:
+
+networks:
+  app-network:
+    driver: bridge

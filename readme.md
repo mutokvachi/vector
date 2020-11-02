@@ -1,4 +1,9 @@
-# Description
+# Day N2: Frontend features added
+
+I have finished `Part 1: Front End`. Now its running without backend but for tommorrow I am going to integrate backend. You just need to pull/clone the repository from git and follow the installation commands below 
+
+
+# Day N1: Description
 
 It is a just setup where you can run application with python3.6 (starlette), react, postgresql. 
 

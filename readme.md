@@ -3,12 +3,12 @@
 I have running application on docker container. With different config files for both `frontend` and `api` projects. Using alembic for creation of postgress model and migration. This is the minimum of the project, we can also add here some features like error handling,validations... But its a testing project so I tried to show you my skills like that. Please check the installation once more, because I added alembic migration command there.  
 
 
-# Day N2: Frontend features added
+# Day N2: Part 1 Finished
 
 I have finished `Part 1: Front End`. Now its running without backend but for tommorrow I am going to integrate backend. You just need to pull/clone the repository from git and follow the installation commands below 
 
 
-# Day N1: Description
+# Day N1: Part 4 Finished
 
 It is a just setup where you can run application with python3.6 (starlette), react, postgresql. 
 

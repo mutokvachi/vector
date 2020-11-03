@@ -18,7 +18,7 @@ I started with this step (`Part 4: Deployment`) because I dont have installed al
 ## Running
 1. `cd api && cp .env.example .env`
 2. `docker-compose build`
-3. `docker-compose up`
+3. `docker-compose up -d`
 4. `docker exec -it starlette alembic upgrade head`
 
 ## Result

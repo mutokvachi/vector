@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
+import Axios from "axios";
 
 
 export const Card = props => {
@@ -14,10 +15,18 @@ export const Card = props => {
 				let arr = [];
 				$('.cats-item').each(function (index, item) {
 					let id = item.getAttribute('data-target');
-					arr.push(id);
+					arr.push(Number(id));
 				});
-				console.log(arr);
+				updatePositions(arr);
 			}
+		});
+	}
+
+	const updatePositions = arr => {
+		Axios.post(`${global.config.api.url}/sort`, {
+			positions: arr,
+		}).then(res => {
+			console.log(res);
 		});
 	}
 
@@ -39,7 +48,7 @@ export const Card = props => {
 
 	return (
 		<div className="cats-item" data-target={props.card.id} onClick={showModal}>
-			<h2>Title:{props.card.title} | Type: {props.card.type}</h2>
+			<h2>ID: {props.card.id} | Title:{props.card.title} | Type: {props.card.type}</h2>
 			<img src={props.card.image} alt={props.card.title} onLoad={onLoadDone}
 			/>
 			<div className="loader"></div>

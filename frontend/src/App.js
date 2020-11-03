@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Overlay} from './components/Overlay';
 import {Card} from './components/Card';
+import Axios from "axios";
 import './App.css';
 
 function App () {
@@ -13,23 +14,23 @@ function App () {
 	}, []);
 
 	const getCards = () => {
-		const fakeData = {
-			data: [
-				{id: 1, title: 'title_1', type: 'type 1', position: 1, image: 'https://visme.co/blog/wp-content/uploads/2020/09/Header-1200-5-500x280.png'},
-				{id: 2, title: 'title_2', type: 'type 2', position: 2, image: 'https://i.pinimg.com/originals/57/9e/d2/579ed2cedf82391c07ec8ca6d4812693.jpg'},
-				{id: 4, title: 'title_2', type: 'type 2', position: 2, image: 'https://eskipaper.com/images/high-resolution-photos-1.jpg'},
-				{id: 5, title: 'title_2', type: 'type 2', position: 2, image: 'https://visme.co/blog/wp-content/uploads/2020/07/Header-1200-500x280.png'},
-				{id: 6, title: 'title_2', type: 'type 2', position: 2, image: 'https://www.larotonde.ca/wordpress2/wp-content/uploads/2020/10/pr%C3%A9carit%C3%A9%C3%A9tudiante-500x280.png'}
-			]
-		};
-		setCardList(fakeData.data);
+		console.log();
+		Axios.get(`${global.config.api.url}/list`).then(res => {
+			console.log(res);
+			setCardList(res.data);
+		});
 	}
 
 	const submitType = () => {
-		const id = Math.floor(Math.random() * 1000) + 7;
-		if (cardName && type) {
-			setCardList([...cardTypeList, {id: id, title: cardName, type: type, position: 3, image: 'https://www.larotonde.ca/wordpress2/wp-content/uploads/2020/10/uni-covid-%C3%A9tudessup-500x280.png'}]);
+		if (!cardName || !type) {
+			return;
 		}
+		Axios.post(`${global.config.api.url}/create`, {
+			title: cardName,
+			type:  type,
+		}).then(res => {
+			setCardList([...cardTypeList, res.data]);
+		})
 	}
 
 	return (
